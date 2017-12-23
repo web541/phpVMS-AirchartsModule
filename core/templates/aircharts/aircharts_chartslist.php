@@ -11,34 +11,53 @@ $(function() {
   </ul>
   <div id="tabs-1">
 	<?php
-	foreach($obj as $o) {
-		echo '<strong>Charts for '.$icao.'</strong>';
+	// ICAO
+	foreach($obj as $ke => $value) {
+		// Title
+		echo '<strong style="font-size: 16px;">Charts for '.$ke.'</strong>';
 		echo '<br />';
+
+		// Dropdown
 		echo '<select onchange="window.open(this.value);" target="_blank">';
 		echo '<option value="" selected disabled>--Select Chart--</option>';
-		foreach($o['charts'] as $c) {
-			echo '<option value="'.$c['url'].'">'.$c['name'].'</option>';
+
+		// Separate each chart group
+		foreach($value["charts"] as $key => $val) {
+			// Charts themselves
+			foreach($val as $c) {
+				echo '<option value="'.$c['url'].'">'.$c['chartname'].'</option>';
+			}
 		}
+
+		// End Dropdown
 		echo '</select>';
 	}
 	?>
-    
+
     <br />
     <p>Disable your pop-up blocker for this page</p>
     <p>Charts provided by <a href="http://aircharts.org" target="_blank">aircharts.org</a></p>
   </div>
-  <div id="tabs-2">
+  <div id="tabs-2" style="text-align: left;">
 	<?php
-	foreach($obj as $o) {
-		echo '<strong>Charts for '.$icao.'</strong>';
+	// ICAO
+	foreach($obj as $ke => $value) {
+		echo '<strong style="font-size: 16px;">Charts for '.$ke.'</strong>';
 		echo '<br />';
-		foreach($o['charts'] as $c) {
-			echo $c['name'].' - <a href="'.$c['url'].'" target="_blank">Link Here</a>';
-			echo '<br />';
+
+		// Separate each chart group
+		foreach($value["charts"] as $key => $val) {
+			echo '<h4>'.$key.' Charts</h4>';
+
+			// Charts themselves
+			foreach($val as $c) {
+				echo $c['chartname'].' - <a href="'.$c['url'].'" target="_blank">Link Here</a>';
+				echo '<br />';
+			}
 		}
 	}
 	?>
-    
+
     <br />
     <p>Charts provided by <a href="http://aircharts.org" target="_blank">aircharts.org</a></p>
   </div>
