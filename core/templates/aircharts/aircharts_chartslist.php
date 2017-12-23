@@ -17,20 +17,25 @@ $(function() {
 		echo '<strong style="font-size: 16px;">Charts for '.$ke.'</strong>';
 		echo '<br />';
 
-		// Dropdown
-		echo '<select onchange="window.open(this.value);" target="_blank">';
-		echo '<option value="" selected disabled>--Select Chart--</option>';
+		// Check that there are charts available
+		if(isset($value["charts"])) {
+			// Dropdown
+			echo '<select onchange="window.open(this.value);" target="_blank">';
+			echo '<option value="" selected disabled>--Select Chart--</option>';
 
-		// Separate each chart group
-		foreach($value["charts"] as $key => $val) {
-			// Charts themselves
-			foreach($val as $c) {
-				echo '<option value="'.$c['url'].'">'.$c['chartname'].'</option>';
+			// Separate each chart group
+			foreach($value["charts"] as $key => $val) {
+				// Charts themselves
+				foreach($val as $c) {
+					echo '<option value="'.$c['url'].'">'.$c['chartname'].'</option>';
+				}
 			}
-		}
 
-		// End Dropdown
-		echo '</select>';
+			// End Dropdown
+			echo '</select>';
+		} else {
+			echo '<h5 style="color: #ff0000;">Charts not available for this airport!</h5>';
+		}
 	}
 	?>
 
@@ -45,15 +50,20 @@ $(function() {
 		echo '<strong style="font-size: 16px;">Charts for '.$ke.'</strong>';
 		echo '<br />';
 
-		// Separate each chart group
-		foreach($value["charts"] as $key => $val) {
-			echo '<h4>'.$key.' Charts</h4>';
+		// Check that there are charts available
+		if(isset($value["charts"])) {
+			// Separate each chart group
+			foreach($value["charts"] as $key => $val) {
+				echo '<h4>'.$key.' Charts</h4>';
 
-			// Charts themselves
-			foreach($val as $c) {
-				echo $c['chartname'].' - <a href="'.$c['url'].'" target="_blank">Link Here</a>';
-				echo '<br />';
+				// Charts themselves
+				foreach($val as $c) {
+					echo $c['chartname'].' - <a href="'.$c['url'].'" target="_blank">Link Here</a>';
+					echo '<br />';
+				}
 			}
+		} else {
+			echo '<h5 style="color: #ff0000;">Charts not available for this airport!</h5>';
 		}
 	}
 	?>
